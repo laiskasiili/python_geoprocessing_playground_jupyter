@@ -18,7 +18,7 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 RUN pip install --upgrade pip && pip install --global-option=build_ext --global-option="-I/usr/include/gdal" GDAL==`gdal-config --version`
 
 # Install further geo-python and work-tool dependencies
-RUN pip install shapely fiona pyproj Rtree openpyxl geopandas rasterio matplotlib jupyter jupyterlab
+RUN pip install shapely fiona pyproj Rtree openpyxl geopandas rasterio rioxarray matplotlib jupyter jupyterlab
 
 # TODO: Install QGIS and make PyQGIS available in notebooks (this is goind to be painful O.o )
 # RUN apt install -y wget gnupg software-properties-common
