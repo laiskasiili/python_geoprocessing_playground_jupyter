@@ -11,6 +11,8 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  # Set default to false, will be checked later
+  SRC_DIR_CHANGED: false
 
 
 jobs:
@@ -32,7 +34,7 @@ jobs:
       # Check if files in src folder have changed. If so, env.SRC_DIFF is set to true.
       - name: Check diff
         run: |
-          if git diff src --exit-code; then
+          if git diff --exit-code src; then
               echo "SRC_DIR_CHANGED=false" >>${GITHUB_ENV}
           else
               echo "SRC_DIR_CHANGED=true" >>${GITHUB_ENV}
