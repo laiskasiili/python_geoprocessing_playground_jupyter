@@ -39,4 +39,3 @@ RUN mkdir /scripts
 COPY ./start_jupyter.sh /scripts/start_jupyter.sh
 RUN ["chmod", "+x", "/scripts/start_jupyter.sh"]
 CMD ["/scripts/start_jupyter.sh"]
-#CMD ["/bin/bash"]
