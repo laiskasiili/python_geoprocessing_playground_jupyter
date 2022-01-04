@@ -11,8 +11,6 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  # Set default to false, will be checked later
-  SRC_DIR_CHANGED: false
 
 
 jobs:
