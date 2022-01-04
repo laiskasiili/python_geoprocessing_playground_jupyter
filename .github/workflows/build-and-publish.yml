@@ -40,7 +40,7 @@ jobs:
               echo "SRC_DIR_CHANGED=true" >>${GITHUB_ENV}
           fi
       - name: Echo SRC_DIR_CHANGED
-      - run: echo $SRC_DIR_CHANGED
+        run: echo $SRC_DIR_CHANGED
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
