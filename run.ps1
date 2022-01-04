@@ -1,1 +1,1 @@
-docker run -it --rm -p 8888:8888 --volume="$($(get-location).Path)":"/geo/data" pythongeopprocessingplayground:latest
+docker run -it --rm -p 8888:8888 --volume="$($(get-location).Path)":"/geo/data" pythongeopprocessingplayground:$(git log -1 --pretty=%H)
