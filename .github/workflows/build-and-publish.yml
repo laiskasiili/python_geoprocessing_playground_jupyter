@@ -32,10 +32,17 @@ jobs:
       # Check if files in src folder have changed. If so, env.SRC_DIFF is set to true.
       - name: Diff src dir
         id: diff_src_dir
+        run: echo "::set-output name=has_changed::$(git diff --exit-code src)"
+
+      # For clarity's sake display a message whether subsequent steps will be skipped or not.
+      - name: Echo diff_src_dir output has_changed
         run: |
-          echo '::echo::on'
-          echo "::set-output name=has_changed::$(git diff --exit-code src)"
-          echo '::echo::off'
+          if ${{ steps.diff_src_dir.outputs.has_changed }}
+          then
+            echo "::notice::Files in src folder have changed. Continue build & push."
+          else
+            echo "::notice::Files in src folder have NOT changed. Skip build & push."
+          fi
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
