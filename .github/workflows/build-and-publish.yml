@@ -37,7 +37,7 @@ jobs:
       # For clarity's sake display a message whether subsequent steps will be skipped or not.
       - name: Echo diff_src_dir output has_changed
         run: |
-          if ${{ steps.diff_src_dir.outputs.has_changed }}; then
+          if [${{ steps.diff_src_dir.outputs.has_changed }}]; then
             echo "::notice::Files in src folder have changed. Continue build & push."
           else
             echo "::notice::Files in src folder have NOT changed. Skip build & push."
