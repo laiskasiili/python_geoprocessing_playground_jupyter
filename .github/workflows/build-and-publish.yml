@@ -3,9 +3,7 @@ name: Build image and publish to GHCR
 
 on:
   push:
-    paths:
-      - 'src/Dockerfile'
-      - 'src/requirements.txt'
+    branches: [ main ]
     tags: [ 'v*.*.*' ]
 
 env:
@@ -31,20 +29,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      # Check if files in src folder have changed. If so, env.SRC_DIFF is set to true.
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v2.1
+
+      # For clarity's sake display a message whether subsequent steps will be skipped or not.
+      - name: Echo diff_src_dir output has_changed
+        run: |
+          echo "{{ steps.changed-files.outputs.modified_files }}"
+
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
+        if: ${{ success() && contains(steps.changed-files.outputs.modified_files, 'Dockerfile') }}
         uses: sigstore/cosign-installer@1e95c1de343b5b0c23352d6417ee3e48d5bcd422
         with:
           cosign-release: 'v1.4.0'
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
+        if: ${{ success() && contains(steps.changed-files.outputs.modified_files, 'Dockerfile') }}
         uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
+        if: ${{ success() && contains(steps.changed-files.outputs.modified_files, 'Dockerfile') }}
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: ${{ env.REGISTRY }}
@@ -54,6 +65,7 @@ jobs:
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
+        if: ${{ success() && contains(steps.changed-files.outputs.modified_files, 'Dockerfile') }}
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
@@ -61,6 +73,7 @@ jobs:
 
       # Build and push Docker image with Buildx
       - name: Build and push Docker image
+        if: ${{ success() && contains(steps.changed-files.outputs.modified_files, 'Dockerfile') }}
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
@@ -81,6 +94,7 @@ jobs:
       # transparency data even for private images, pass --force to cosign below.
       # https://github.com/sigstore/cosign
       - name: Sign the published Docker image
+        if: ${{ success() && contains(steps.changed-files.outputs.modified_files, 'Dockerfile') }}
         env:
           COSIGN_EXPERIMENTAL: "true"
         # This step uses the identity token to provision an ephemeral certificate
