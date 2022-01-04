@@ -34,7 +34,7 @@ jobs:
         id: diff_src_dir
         run: |
           echo '::echo::on'
-          echo '::set-output name=has_changed::$(git diff --exit-code src)'
+          echo "::set-output name=has_changed::$(git diff --exit-code src)"
           echo '::echo::off'
 
       # Install the cosign tool except on PR
