@@ -1,2 +1,3 @@
 examples/
 ignore/
+src/build_local.ps1
