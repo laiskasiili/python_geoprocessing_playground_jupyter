@@ -33,9 +33,10 @@ jobs:
       - name: Diff src dir
         id: diff_src_dir
         run: |
-          echo "::set-output name=has_changed::$(git diff --exit-code src)"
-      - name: Echo SRC_DIR_CHANGED
-        run: echo ${{ steps.diff_src_dir.outputs.has_changed }}
+          echo '::echo::on'
+          echo '::set-output name=has_changed::$(git diff --exit-code src)'
+          echo '::echo::off'
+
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
