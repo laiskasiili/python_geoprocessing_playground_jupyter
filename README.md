@@ -1,8 +1,7 @@
 # pythonGeoprocessingPlayground
-This repository is a playground for me to learn about containerization while addressing the painpoint of setup complexity when it comes to python geo ecosystem with its dependencies.
-
-
 ## What is this about?
+This repository is primarily a playground for me to do first baby steps in expanding my horizon towards the devops world to learn about containerization, CI/CD, etc.
+
 The goal is to make it easy and fun to experiment with Python's geoprocessing ecosystem without worrying about the sometimes tedious installation of dependencies (yes, I am looking at you GDAL and geopandas). The dockerfile in this repository allows to spin up a jupyterlab instance whose kernel has access to many common packages like Fiona, Shapely, Geopandas, Rasterio, etc. which work neatly together. Concentrate on the fun part of exploring the tools and processing your data without worrying about setup.
 
 ## Run with image from github package repository
