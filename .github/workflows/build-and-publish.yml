@@ -5,7 +5,7 @@ on:
   push:
     # branches: [ main ]
     paths:
-      - './src'
+      - './src/**'
     tags: [ 'v*.*.*' ]
   # pull_request:
     # branches: [ main ]
