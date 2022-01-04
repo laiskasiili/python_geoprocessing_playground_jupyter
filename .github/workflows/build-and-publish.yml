@@ -37,6 +37,9 @@ jobs:
             src/*
             src/**
 
+      - name: Echo git diff
+        run: echo "Found diff in src/? ${{ env.GIT_DIFF }}"
+
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
