@@ -29,7 +29,7 @@ RUN mkdir /setup
 COPY ./requirements.txt /setup/requirements.txt
 RUN pip install -r /setup/requirements.txt
 
-# TODO:
+# TODO
 # Install QGIS and make PyQGIS available in notebooks as kernel.
 # Judging from first research this is going to be non-trivial.
 
