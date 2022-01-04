@@ -33,9 +33,9 @@ jobs:
       - name: Check diff
         run: |
           if git diff --exit-code src; then
-              echo "SRC_DIR_CHANGED=false" >>${GITHUB_ENV}
+              echo "SRC_DIR_CHANGED=false" >> $GITHUB_ENV
           else
-              echo "SRC_DIR_CHANGED=true" >>${GITHUB_ENV}
+              echo "SRC_DIR_CHANGED=true" >> $GITHUB_ENV
           fi
       - name: Echo SRC_DIR_CHANGED
         run: echo ${{ env.SRC_DIR_CHANGED }}
