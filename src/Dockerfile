@@ -35,9 +35,9 @@ RUN pip install -r /setup/requirements.txt
 
 # Setup to run jupyterlab when starting container.
 COPY ./start_jupyter.sh /setup/start_jupyter.sh
-RUN ["chmod", "+x", "/scripts/start_jupyter.sh"]
+RUN ["chmod", "+x", "/setup/start_jupyter.sh"]
 
 RUN mkdir /geo
 WORKDIR /geo
 
-CMD ["/scripts/start_jupyter.sh"]
+CMD ["/setup/start_jupyter.sh"]
