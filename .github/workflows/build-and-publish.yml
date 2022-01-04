@@ -36,6 +36,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./src
+          # Caching
+          cache-from: type=inline
+          cache-to: type=inline
           # Note: tags has to be all lower-case
           tags: ${{ github.repository }}:${{ github.sha }}
           # build on feature branches, push only on main branch
