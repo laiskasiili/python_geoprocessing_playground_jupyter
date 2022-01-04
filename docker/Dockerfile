@@ -1,10 +1,7 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.9-slim@sha256:f4efbe5d1eb52c221fded79ddf18e4baa0606e7766afe2f07b0b330a9e79564a
 
 LABEL description="Various python geoprocessing components \
 (geopandas, gdal bindings, rasterio, ...) with dependiencies neatly working together."
-
-RUN mkdir /geo
-WORKDIR /geo
 
 # Install GDAL
 RUN apt update && apt install -y binutils libproj-dev gdal-bin libgdal-dev
@@ -17,36 +14,25 @@ ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 RUN pip install --upgrade pip && pip install --global-option=build_ext --global-option="-I/usr/include/gdal" GDAL==`gdal-config --version`
 
-# Install python packages for geoprocessing and workflow
-RUN pip install \
-    # Shapely does planar geometric processing (uses GEOS).
-    shapely \
-    # Fiona reads and writes everything (uses OGR).
-    fiona \
-    # Pyproj handles projections (uses PROJ).
-    pyproj \
-    # Rtree spatial indexing (plays well with geopandas).
-    Rtree \
-    # Openpyxl is required by geopandas to write excel files.
-    openpyxl \
-    # Matplotlib is required by geopandas to visualize geometries.
-    matplotlib \
-    # Geopandas extends pandas with geospatial capabilities
-    # (uses shapely, fiona, pyproj, Rtree, ...)
-    geopandas \
-    # Rasterio makes working with rasters fun (uses GDAL).
-    rasterio \
-    # Xarray deals with multidimensional data. Ideal to read/writes netCDF files.
-    xarray \
-    # Various io plugins to read/write data in xarray, e.g. netCDF, GRIB,...
-    xarray[io] \
-    # As of 20220401 there is a bug in xarray[io] for ecmw. Explicitly install ecmwflibs
-    # here, but in future xarray[io] should suffice.
-    ecmwflibs \
-    # Extension of xarray to seamlessly interface with rasterio for 2D raster data.
-    rioxarray \
-    # Jupyterlab allows to write rich scripts (notebooks) and run code interactively in the browser.
-    jupyterlab
+# Install python packages for geoprocessing and workflow:
+# -------------------------------------------------------
+# Shapely: Does planar geometric processing (uses GEOS).
+# Fiona: Reads and writes everything (uses OGR).
+# Pyproj: Handles projections (uses PROJ).
+# Rtree: Spatial indexing (plays well with geopandas).
+# Openpyxl: Is required by geopandas to write excel files.
+# Matplotlib: Is required by geopandas to visualize geometries.
+# Geopandas: Extends pandas with geospatial capabilities (uses shapely, fiona, pyproj, Rtree, ...)
+# Rasterio Makes working with rasters fun (uses GDAL).
+# Xarray: Deals with multidimensional data. Ideal to read/writes netCDF files.
+# Xaaray[io]: Various io plugins to read/write data in xarray, e.g. netCDF, GRIB,...
+# Ecmwflibs: Install because of bug in xarray[io] as of 20210104, but in future xarray[io] should suffice.
+# Rioxarray: Extension of xarray to seamlessly interface with rasterio for 2D raster data.
+# Jupyterlab: Allows to write rich scripts (notebooks) and run code interactively in the browser.
+RUN mkdir /geo
+WORKDIR /geo
+COPY ./requirements.txt /geo/requirements.txt
+RUN pip install -r /geo/requirements.txt
 
 # TODO:
 # Install QGIS and make PyQGIS available in notebooks as kernel.
