@@ -10,8 +10,8 @@ ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 RUN pip install --upgrade pip && pip install --global-option=build_ext --global-option="-I/usr/include/gdal" GDAL==`gdal-config --version`
 
-# Install python packages for geoprocessing and workflow:
-# -------------------------------------------------------
+# Install python packages for geoprocessing and workflow
+# ------------------------------------------------------
 # Shapely: Does planar geometric processing (uses GEOS).
 # Fiona: Reads and writes everything (uses OGR).
 # Pyproj: Handles projections (uses PROJ).
