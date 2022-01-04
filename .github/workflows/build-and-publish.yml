@@ -3,7 +3,9 @@ name: Build image and publish to GHCR
 
 on:
   push:
-    branches: [ main ]
+    # branches: [ main ]
+    paths:
+      - './src'
     tags: [ 'v*.*.*' ]
   # pull_request:
     # branches: [ main ]
