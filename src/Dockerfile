@@ -34,7 +34,7 @@ RUN pip install -r /geo/requirements.txt
 # Install QGIS and make PyQGIS available in notebooks as kernel.
 # Judging from first research this is going to be non-trivial.
 
-# Setup to run jupyterlab when starting container
+# Setup to run jupyterlab when starting container.
 RUN mkdir /scripts
 COPY ./start_jupyter.sh /scripts/start_jupyter.sh
 RUN ["chmod", "+x", "/scripts/start_jupyter.sh"]
