@@ -25,17 +25,19 @@ RUN pip install --upgrade pip && pip install --global-option=build_ext --global-
 # Ecmwflibs: Install because of bug in xarray[io] as of 20210104, but in future xarray[io] should suffice.
 # Rioxarray: Extension of xarray to seamlessly interface with rasterio for 2D raster data.
 # Jupyterlab: Allows to write rich scripts (notebooks) and run code interactively in the browser.
-RUN mkdir /geo
-WORKDIR /geo
-COPY ./requirements.txt /geo/requirements.txt
-RUN pip install -r /geo/requirements.txt
+RUN mkdir /setup
+COPY ./requirements.txt /setup/requirements.txt
+RUN pip install -r /setup/requirements.txt
 
 # TODO
 # Install QGIS and make PyQGIS available in notebooks as kernel.
 # Judging from first research this is going to be non-trivial.
 
 # Setup to run jupyterlab when starting container.
-RUN mkdir /scripts
-COPY ./start_jupyter.sh /scripts/start_jupyter.sh
+COPY ./start_jupyter.sh /setup/start_jupyter.sh
 RUN ["chmod", "+x", "/scripts/start_jupyter.sh"]
+
+RUN mkdir /geo
+WORKDIR /geo
+
 CMD ["/scripts/start_jupyter.sh"]
