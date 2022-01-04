@@ -35,9 +35,9 @@ jobs:
         uses: tj-actions/changed-files@v2.1
 
       # For clarity's sake display a message whether subsequent steps will be skipped or not.
-      - name: Echo diff_src_dir output has_changed
+      - name: Echo changed files
         run: |
-          echo "{{ steps.changed-files.outputs.modified_files }}"
+          echo "::notice::${{ steps.changed-files.outputs.modified_files }}"
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
