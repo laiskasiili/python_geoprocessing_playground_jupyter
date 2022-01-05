@@ -3,15 +3,8 @@ name: Build image and publish to GHCR
 
 on:
   push:
-    branches:
-      - 'master'
-      paths:
-        - src/**
     tags:
       - 'v*.*.*'
-  # pull_request:
-  #   paths:
-  #     - src/**
 
 env:
   # Use docker.io for Docker Hub if empty
