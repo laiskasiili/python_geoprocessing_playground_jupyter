@@ -18,6 +18,8 @@ RUN pip install --upgrade pip && pip install --global-option=build_ext --global-
 # Rtree: Spatial indexing (plays well with geopandas).
 # Openpyxl: Is required by geopandas to write excel files.
 # Matplotlib: Is required by geopandas to visualize geometries.
+# Mapclassify: Utility package for classification schemes for Choropleth Maps. Used by geopandas for GeoDataFrame.explore().
+# Folium: Provides interactive plotting capbilities. Used by geopandas for GeoDataFrame.explore().
 # Geopandas: Extends pandas with geospatial capabilities (uses shapely, fiona, pyproj, Rtree, ...)
 # Rasterio Makes working with rasters fun (uses GDAL).
 # Xarray: Deals with multidimensional data. Ideal to read/writes netCDF files.

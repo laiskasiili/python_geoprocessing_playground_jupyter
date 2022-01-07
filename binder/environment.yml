@@ -8,3 +8,5 @@ dependencies:
   - rasterio
   - xarray
   - xarray[io]
+  - folium
+  - mapclassify
