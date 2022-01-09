@@ -77,13 +77,13 @@ parso==0.8.3
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==9.0.0
-pip==21.3.1
 pooch==1.5.2
 prometheus-client==0.12.0
 prompt-toolkit==3.0.24
 ptyprocess==0.7.0
 pycparser==2.21
 Pydap==3.2.2
+pygeos==0.12.0
 Pygments==2.11.1
 pyparsing==3.0.6
 pyproj==3.3.0
@@ -98,7 +98,6 @@ Rtree==0.9.7
 scikit-learn==1.0.2
 scipy==1.7.3
 Send2Trash==1.8.0
-setuptools==57.5.0
 Shapely==1.8.0
 six==1.16.0
 sniffio==1.2.0
@@ -114,6 +113,5 @@ wcwidth==0.2.5
 webencodings==0.5.1
 WebOb==1.8.7
 websocket-client==1.2.3
-wheel==0.37.0
 xarray==0.20.2
 zarr==2.10.3
